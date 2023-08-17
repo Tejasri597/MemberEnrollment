@@ -6,7 +6,7 @@ using Moq;
 using MemberEnrollment.Controllers;
 using System;
 
-namespace MemberEnrollment.Controllers
+namespace MemberEnrollment.Tests
 {
     public class MemberControllerTests
     {

@@ -1,4 +1,4 @@
-﻿using MemberEnrollment.Models;
+﻿using MemberEnrollment.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace MemberEnrollment.Data
@@ -11,8 +11,7 @@ namespace MemberEnrollment.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("valid connection string");
-            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseInMemoryDatabase(databaseName: "MemberDB");
         }
     }
 }

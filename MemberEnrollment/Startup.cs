@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MemberEnrollment.Data;
 using MemberEnrollment.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace MemberEnrollment
 {
@@ -10,26 +9,15 @@ namespace MemberEnrollment
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(); // Add this line to enable controller-based routing
-            services.AddScoped<MemberRepository>();
-            services.AddTransient<MemberRepository>();
-            //services.AddScoped();// Add other services your application requires
-        }
+            // Add other service configurations as needed
+            services.AddControllers();
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            // Register your database context
+            //services.MemberDbContext<MemberDbContext>(opt => opt.UseInMemoryDatabase("MemberEnrollmentDB"));
 
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers(); // Map controller routes
-                // Add other endpoints if needed
-            });
+            // Register your repository with the appropriate lifetime (e.g., AddScoped)
+            services.AddScoped<MemberRepository, MemberRepository>();
+            //services.ValidateResolvedServices();
         }
     }
 }
